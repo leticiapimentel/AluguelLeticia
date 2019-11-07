@@ -1,0 +1,52 @@
+pragma solidity 0.5.12;
+
+contract AluguelLeticia {
+    
+    string public Locatario;
+    string public Locador;
+    bool public FinalidadeEducacional;
+    uint256 private valorDoAluguel;
+    uint256 private valorDoPagamento;
+    uint256 public DataDeVencimento;
+    uint256 public DataDePagamento;
+    address payable private contaLocatario;
+        // a conta eh do locatario pq o dinheiro sai da conta dele?
+    uint256 constant public Multa;
+    
+    constructor (string memory nomeLocatario,
+        string memory nomeLocador,
+        uint256  _valorDoAluguel,
+        uint256  DataDeVencimentoDoAluguel,
+        uint256 DataDePagamentoDoAluguel,
+        address payable  _contaLocatario,
+        uint256  valorMulta
+    ) public
+    {
+        Locatario = nomeLocatario;
+        Locador = nomeLocador;
+        FinalidadeEducacional = true;
+        DataDeVencimento = DataDeVencimentoDoAluguel;
+        DataDePagamento = DataDePagamentoDoAluguel;
+        valorDoAluguel =_valorDoAluguel;
+        contaLocatario = _contaLocatario;
+        Multa = 3*valorDoAluguel;
+    }
+    
+    function AplicacaoMultaAtrasoNoPagamento (uint256 DataDePagamentoDoAluguel)
+    public {
+        if (DataDePagamentoDoAluguel > DataDeVencimento){
+                valorDoPagamento = valorDoAluguel + Multa;
+        }
+        
+    }
+    
+
+    function FinalidadeDaLocacaoNaoResidencial (string memory _FinalidadeDaLocacaoNaoResidencial) 
+    public {
+        require (FinalidadeDaLocacaoNaoResidencial == PrestarServicosEducacionais, "Objeto Inválido");
+            
+        }
+
+    
+    
+}
